@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northpoint Workspaces — Book an office room in Johor Bahru</title>
+<meta name="description" content="Hourly meeting rooms, conference rooms, private offices and training rooms. Check availability and book in under a minute.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">N</span>
+      <span class="logo-text">Northpoint Workspaces</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Main">
+      <ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#about">About us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button class="btn btn-primary header-cta" data-book-any>Book a room</button>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav">
+      <span class="sr-only">Menu</span>
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M0 1h18M0 7h18M0 13h18"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Jalan Molek · Johor Bahru</p>
+        <h1>Find the right space<br>for the work at hand.</h1>
+        <p class="lede">Meeting rooms, conference rooms, private offices and training rooms — booked by the hour. Pick your room, pick your hours, done.</p>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-book-any>Book a room</button>
+          <a class="btn btn-ghost" href="#rooms">See rooms and prices</a>
+        </div>
+
+        <dl class="hero-stats">
+          <div><dt>4</dt><dd>Room types</dd></div>
+          <div><dt>08–20</dt><dd>Open daily</dd></div>
+          <div><dt>RM30</dt><dd>From, per hour</dd></div>
+        </dl>
+      </div>
+
+      <!-- Abstract floor plan. Swap for a photo when you have one. -->
+      <div class="floorplan" aria-hidden="true">
+        <div class="fp-cell tall">Training</div>
+        <div class="fp-cell">Private</div>
+        <div class="fp-cell lit">Meeting · free</div>
+        <div class="fp-cell wide">Conference</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY US ============ -->
+  <section class="why">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Why book here</p>
+        <h2>Everything ready before you walk in</h2>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="8"/><path d="M10 5v5l3 2"/></svg>
+          </div>
+          <h3>Hourly, not daily</h3>
+          <p>Pay for the hours you use. A two-hour review costs two hours, not a full day rate.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17V8l7-5 7 5v9"/><path d="M8 17v-5h4v5"/></svg>
+          </div>
+          <h3>Set up on arrival</h3>
+          <p>Screens on, whiteboard cleaned, Wi-Fi details on the table. Nothing to configure.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10l4 4 8-8"/></svg>
+          </div>
+          <h3>See real availability</h3>
+          <p>Booked hours are greyed out before you fill anything in. No back-and-forth emails.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="14" height="11" rx="2"/><path d="M3 8h14"/></svg>
+          </div>
+          <h3>Price before you commit</h3>
+          <p>The total updates as you pick hours. What you see is what you pay.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ROOMS ============ -->
+  <section id="rooms">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Rooms and pricing</p>
+        <h2>Four spaces, priced by the hour</h2>
+        <p class="lede" style="margin-top:.75rem">All rooms include Wi-Fi and air conditioning. Prices are per hour, inclusive of tax.</p>
+      </div>
+
+      <!-- Cards are rendered by JavaScript so they can come from
+           a database later without touching this file. -->
+      <div class="room-grid" id="roomGrid">
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="how">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2 style="max-width:18ch">Four steps, about a minute</h2>
+      </div>
+      <div class="how-grid">
+        <div class="how-step"><h3>Pick a room</h3><p>Compare capacity, facilities and hourly rate.</p></div>
+        <div class="how-step"><h3>Choose your hours</h3><p>Tap a start hour and an end hour on the timeline.</p></div>
+        <div class="how-step"><h3>Add your details</h3><p>Name, contact, headcount and what the room is for.</p></div>
+        <div class="how-step"><h3>Confirm</h3><p>You get a booking reference on screen straight away.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="about">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">About us</p>
+        <h2>A workspace built around short bookings</h2>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <p class="lede">Northpoint Workspaces opened in 2021 with one floor and three rooms. We noticed that most people did not want a desk for a month — they wanted a proper room for two hours, with a screen that worked.</p>
+          <p class="lede" style="margin-top:1rem">Today we run four room types on Jalan Molek, used by consultancies, tuition providers, remote teams and companies interviewing candidates.</p>
+
+          <div class="pillar">
+            <h3>Our mission</h3>
+            <p>Make a professional room as easy to book as a table at a restaurant.</p>
+          </div>
+          <div class="pillar">
+            <h3>Our vision</h3>
+            <p>Workspace in Johor that is priced by the hour, available the same day, and never requires a contract.</p>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="margin-bottom:.5rem">Office facilities</h3>
+          <p style="font-size:.95rem">Shared amenities available to everyone with a booking:</p>
+          <ul class="facilities">
+            <li>Fibre Wi-Fi, 500 Mbps</li>
+            <li>Pantry and free coffee</li>
+            <li>Reception and guest check-in</li>
+            <li>Printing and scanning</li>
+            <li>Covered parking</li>
+            <li>Accessible entrance and lift</li>
+            <li>Air conditioning throughout</li>
+            <li>Cleaned between bookings</li>
+          </ul>
+
+          <div class="card-panel" style="margin-top:1.75rem">
+            <h3 style="margin-bottom:.5rem">Why choose us</h3>
+            <p style="font-size:.95rem">No membership, no deposit, no minimum booking beyond one hour. If a room is free on the timeline, you can have it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Contact</p>
+        <h2>Come and see the rooms</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div>
+          <dl class="contact-list">
+            <div>
+              <dt>Address</dt>
+              <dd>18-02, Jalan Molek 1/29<br>Taman Molek, 81100 Johor Bahru<br>Johor, Malaysia</dd>
+            </div>
+            <div>
+              <dt>Phone</dt>
+              <dd><a href="tel:+6072345678">+60 7-234 5678</a></dd>
+            </div>
+            <div>
+              <dt>Email</dt>
+              <dd><a href="mailto:hello@northpointworkspaces.my">hello@northpointworkspaces.my</a></dd>
+            </div>
+            <div>
+              <dt>Business hours</dt>
+              <dd>Monday to Sunday, 8:00 am – 8:00 pm</dd>
+            </div>
+          </dl>
+
+          <div class="map-frame">
+            <iframe
+              title="Map showing Northpoint Workspaces in Taman Molek, Johor Bahru"
+              src="https://www.google.com/maps?q=Taman+Molek,+Johor+Bahru&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <h3 style="margin-bottom:1.25rem">Send us a message</h3>
+          <form id="contactForm" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="cName">Name <span class="req">*</span></label>
+                <input type="text" id="cName" name="name" required autocomplete="name">
+                <p class="field-error">Enter your name.</p>
+              </div>
+              <div class="field">
+                <label for="cEmail">Email <span class="req">*</span></label>
+                <input type="email" id="cEmail" name="email" required autocomplete="email">
+                <p class="field-error">Enter a valid email address.</p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="cSubject">Subject</label>
+              <input type="text" id="cSubject" name="subject">
+            </div>
+            <div class="field">
+              <label for="cMessage">Message <span class="req">*</span></label>
+              <textarea id="cMessage" name="message" required></textarea>
+              <p class="field-error">Tell us how we can help.</p>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send message</button>
+            <p id="contactResult" class="notice" style="display:none"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo footer-logo" style="margin-bottom:1rem">
+          <span class="logo-mark">N</span>
+          <span class="logo-text">Northpoint Workspaces</span>
+        </div>
+        <p style="font-size:.92rem;max-width:34ch">Hourly meeting and training rooms in Taman Molek, Johor Bahru.</p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="#top">Home</a></li>
+          <li><a href="#rooms">Rooms</a></li>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rooms</h4>
+        <ul id="footerRooms"></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Northpoint Workspaces. Demo project.</span>
+      <span>Built on AWS S3 · CloudFront · Lambda · DynamoDB</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ BOOKING MODAL ============ -->
+<div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h3 id="modalTitle">Book a room</h3>
+        <p class="sub" id="modalSub"></p>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close booking form">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l12 12M13 1L1 13"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot" id="modalFoot"></div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/api.js"></script>
+<script src="js/components.js"></script>
+<script src="js/booking.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
