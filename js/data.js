@@ -18,7 +18,7 @@ const ROOMS = [
     description:
       "A quiet room for team catch-ups, client calls, and small reviews.",
     capacity: 6,
-    pricePerHour: 30,
+    pricePerHour: 40,
     facilities: ["TV screen", "Whiteboard", "Wi-Fi"],
     // Used to draw the room artwork. Swap for real photos later.
     art: "meeting",

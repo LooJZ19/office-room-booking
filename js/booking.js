@@ -35,7 +35,7 @@ async function openBooking(roomId) {
 
   modal.classList.add("open");
   document.body.style.overflow = "hidden";
-  renderBookingForm();
+  await renderBookingForm();
   document.getElementById("modalClose").focus();
 }
 
@@ -50,11 +50,12 @@ async function refreshAvailability() {
 }
 
 /* ---------- render the form ---------- */
-function renderBookingForm() {
+async function renderBookingForm() {
   modalTitle.textContent = "Book " + state.room.name;
   modalSub.textContent = `RM${state.room.pricePerHour}/hour · up to ${state.room.capacity} people`;
 
-  const roomOptions = ROOMS.map(
+  const allRooms = await API.getRooms();
+  const roomOptions = allRooms.map(
     (r) =>
       `<option value="${r.id}" ${r.id === state.room.id ? "selected" : ""}>
          ${escapeHtml(r.name)} — RM${r.pricePerHour}/hr
@@ -139,7 +140,7 @@ function wireForm() {
     state.room = await API.getRoom(e.target.value);
     state.startHour = state.endHour = null;
     await refreshAvailability();
-    renderBookingForm();
+    await renderBookingForm();
   });
 
   document.getElementById("bDate").addEventListener("change", async (e) => {

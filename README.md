@@ -1,3 +1,6 @@
+## Live site
+https://d18sp44hw9y8bc.cloudfront.net
+
 # Northpoint Workspaces — Office Room Booking
 
 A room booking site built as a step-by-step AWS learning project.
