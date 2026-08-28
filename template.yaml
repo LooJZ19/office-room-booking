@@ -1,0 +1,122 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Northpoint Workspaces — serverless booking backend
+
+# Defaults applied to every function below, so we don't repeat them.
+Globals:
+  Function:
+    Runtime: nodejs22.x
+    Architectures: [arm64]
+    Timeout: 10
+    MemorySize: 256
+
+Resources:
+
+  # ---------- Database ----------
+
+  RoomsTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: !Sub "${AWS::StackName}-Rooms"
+      PrimaryKey:
+        Name: roomID
+        Type: String
+
+  BookingsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${AWS::StackName}-Bookings"
+      BillingMode: PAY_PER_REQUEST
+      # The composite key that makes availability a Query, not a Scan.
+      AttributeDefinitions:
+        - AttributeName: roomDate
+          AttributeType: S
+        - AttributeName: startHour
+          AttributeType: N
+      KeySchema:
+        - AttributeName: roomDate
+          KeyType: HASH
+        - AttributeName: startHour
+          KeyType: RANGE
+
+  # ---------- API ----------
+
+  BookingApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: $default
+      CorsConfiguration:
+        AllowOrigins: ["*"]
+        AllowHeaders: ["content-type"]
+        AllowMethods: [GET, POST, OPTIONS]
+        MaxAge: 300
+
+  # ---------- Functions ----------
+
+  GetRoomsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/getRooms/
+      Handler: index.handler
+      Environment:
+        Variables:
+          ROOMS_TABLE: !Ref RoomsTable
+      # SAM writes the IAM policy for us. Read-only, this table only.
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref RoomsTable
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref BookingApi
+            Path: /rooms
+            Method: GET
+
+  GetAvailabilityFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/getAvailability/
+      Handler: index.handler
+      Environment:
+        Variables:
+          BOOKINGS_TABLE: !Ref BookingsTable
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref BookingsTable
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref BookingApi
+            Path: /availability
+            Method: GET
+
+  CreateBookingFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/createBooking/
+      Handler: index.handler
+      Environment:
+        Variables:
+          BOOKINGS_TABLE: !Ref BookingsTable
+      # The only function that can write. Least privilege, enforced by code.
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref BookingsTable
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref BookingApi
+            Path: /bookings
+            Method: POST
+
+Outputs:
+  ApiUrl:
+    Description: Base URL for the booking API
+    Value: !Sub "https://${BookingApi}.execute-api.${AWS::Region}.amazonaws.com"
+  RoomsTableName:
+    Value: !Ref RoomsTable
+  BookingsTableName:
+    Value: !Ref BookingsTable
